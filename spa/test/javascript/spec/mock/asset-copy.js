@@ -1,0 +1,1 @@
+var asset_copy_mock = {"id":"25391456"}

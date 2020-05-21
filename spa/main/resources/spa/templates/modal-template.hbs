@@ -1,0 +1,202 @@
+<div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{modaltitle}}</h5>
+                    {{#if savemodal}}
+                    <button type="button" class="close-action close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{/if}}
+                    {{#if returnmodal}}
+                    <button type="button" class="close-action close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{/if}}
+                    {{#if finishmodal}}
+                    <button type="button" class="close-action close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{/if}}
+                    {{#if helpmodal}}
+                    <button type="button" class="close-action close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{/if}}
+                    {{#if rejectmodal}}
+                    <button type="button" class="close-action close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{/if}}
+                </div>
+     
+    <div class="modal-body">
+        {{#if helpmodal}}
+            <div class="{{view}}">
+                <h2>Keyboards shortcuts</h2>
+                <table>
+                    <tr>
+                        <td>ctrl-space:</td>
+                        <td>play/pause v&iacute;deo while typing </td>
+                    </tr>
+                    <tr>
+                        <td>space:</td>
+                        <td>play/pause v&iacute;deo</td>                            
+                    </tr>
+                    <tr>
+                        <td>escape:</td>
+                        <td>Cancel current edition</td>                            
+                    </tr>
+                    <tr>
+                        <td>enter:</td>
+                        <td>Accept subtitle</td>                            
+                    </tr>
+                    <tr>
+                        <td>e:</td>
+                        <td>Edit subtitle</td>                            
+                    </tr>
+                    <tr>
+                        <td>c:</td>
+                        <td>Mark as conflict in evaluator mode</td>                            
+                    </tr>
+                    <tr>
+                        <td>Arrow down/up:</td>
+                        <td>Focus next/previous subtitle</td>                            
+                    </tr>
+                </table>
+                <h2>Icons</h2>
+                <table>
+                    <tr>
+                        <td><img src="img/reject.svg" alt="Reject"></td>
+                        <td>Reject translation</td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/undo.svg" alt="undo"></td>
+                        <td>Undo translation</td>
+                    </tr>
+                    <tr>
+                        <td><img src="img/long-text.svg" alt="Long Text"></td>
+                        <td>Subtitle too long</td>
+                    </tr>
+                    <tr>
+                        <td><span class="blue">Blue text</span></td>
+                        <td>Text edited by reviewer</td>
+                    </tr>
+                    <tr>
+                        <td><span class="green">Green text</span></td>
+                        <td>Text edited</td>
+                    </tr>
+                    <tr>
+                        <td><span style="background-color: #ffffe5">Yellow Box</span></td>
+                        <td>Edited but not accepted</td>    
+                    </tr>
+                    <tr>
+                        <td><span style="background-color:#e7f7ed">Green Box</span></td>
+                        <td>Accepted subtitle</td>    
+                    </tr>
+                    <tr>
+                        <td><span style="background-color:#ffeaeb">Red Box</span></td>
+                        <td>Subtitle rejected</td>    
+                    </tr>
+                </table>
+                {{!-- <h2>Tips</h2>
+                <div class="notes">Avoid using HTML tags. While editing, symbols & , < , >  and / will be removed.</div> --}}
+            </div>
+        {{/if}}
+
+        {{#if successModal}}
+            {{#if successReject}}
+                <p>The reject was made successfully.</p>
+                <p>Press the button to return to the  Crowdsourcing Platform.</p>                            
+            {{/if}}
+            {{#if savemodal}}
+                <p>The changes you made were saved correctly.</p>
+                <p>You may now continue editing by clicking the button or closing this tab.</p>            
+                <p>Or you may quit and end your session by clicking on the corresponding button.</p>
+            {{/if}}
+            {{#unless successReject}}
+                {{#unless savemodal}}
+                    The data is correctly saved and the task has been finished. <br> You may now return to the Crowdsourcing platform.
+                {{/unless}}
+            {{/unless}}
+        {{/if}}
+
+        {{#if returnmodal}}
+            <p>What do you want to do?</p>
+        {{/if}}
+
+        {{#if finishmodal}}
+            {{#if reviewerActive}}
+                <p>This action will finish the job. The result will be delivered to the ContentOwner and won't be available anymore to be edited.</p>
+            {{else}}
+                <p>The task won't be available anymore to review.</p>                    
+                <p>An evaluator will check your job and may give feedback to it.</p>
+            {{/if}}               
+        {{/if}}
+
+        {{#if rejectmodal}}
+            <h2>Introduce here the reason of rejection (Text cannot be empty). </h2>        
+            <textarea class="rejectarea" rows="15" id="textRejected"/>
+            <h2><br>The changes you made will be saved and the task will be rejected.</h2> 
+        {{/if}}
+
+        {{#if resetmodal}}
+            <p>Thanks for evaluating this level test!</p>
+            <p>Do you think the translation quality is enough to accept this user?</p>
+        {{/if}}
+
+        {{#if errorModal}}
+            <h2>{{{errorText}}}</h2>        
+        {{/if}}
+
+    </div>
+      
+
+
+    <div class="modal-footer">
+        {{#if dataAction}}
+            {{#unless errorModal}}
+                {{#if finishmodal}}
+                    <button type="button" class="accept-action btn btn-primary" data-dismiss="modal">Accept</button>
+                {{/if}}
+                {{#if resetmodal}}
+                    <button type="button" class="accept-action btn btn-success" data-dismiss="modal">Suitable</button>
+                    <button type="button" class="accept-action btn btn-danger" data-dismiss="modal">Not suitable</button>
+                {{/if}}
+                {{#if rejectmodal}}
+                    <button type="button" class="accept-action btn btn-primary" id= "AcceptReject" data-dismiss="modal" disabled="true">Accept</button>
+                {{/if}}
+                {{#if savemodal}}
+                    <button type="button" class="close-action btn btn-primary" data-dismiss="modal">Continue</button>
+                    <button type="button" class="cancel-action btn btn-secondary" data-dismiss="modal">End Session</button>
+                {{/if}}
+
+                {{#unless returnmodal}}
+                    {{#if successModal}}
+                        {{#if successReject}}
+                            <button type="button" class="cancel-action btn btn-secondary" data-dismiss="modal">End Session</button>
+                        {{/if}}
+                        {{#unless successReject}}
+                            {{#unless savemodal}}
+                                <button type="button" class="cancel-action btn btn-secondary" data-dismiss="modal">End Session</button>
+                            {{/unless}}
+                        {{/unless}}
+                    {{else}}
+                        <button type="button" class="cancel-action btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    {{/if}}
+                {{/unless}}
+
+            {{/unless}}
+            {{#if returnmodal}}
+                <button type="button" class="btn btn-primary save-progress-action" data-dismiss="modal" id="saveButton">Save & End session</button>
+                <button type="button" class="discard-action btn btn-danger" data-dismiss="modal">End session without saving</button>
+                <button type="button" class="cancel-action btn btn-secondary" data-dismiss="modal">Cancel</button>
+            {{/if}}
+            {{#if errorModal}}
+                <button type="button" class="discard-action btn btn-primary" data-dismiss="modal">Accept</button>
+            {{/if}}
+        {{/if}}
+        {{#if helpmodal}} <button type="button" class="btn btn-primary" data-dismiss="modal">Close Help</button>  {{/if}}
+    </div>
+
+    </div>
+  </div>

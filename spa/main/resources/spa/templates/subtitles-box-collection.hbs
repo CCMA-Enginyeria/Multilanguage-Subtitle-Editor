@@ -1,0 +1,49 @@
+
+    <div class="R-headers">
+        <div class="R-header f1 col-md-2 tcinout">
+            <div>IN</div>
+            <div>OUT</div>
+        </div>
+        <div class="R-header f1 col-md-2 languagesID">
+            <div>{{originalLanguage}}</div>
+            <div>{{translatedLanguage}}</div>
+        </div>
+        <div class="R-header f1 filter">
+            <a href="#" class="R-refresh refresh-filter-action"><img src="img/refresh.svg" alt="Refrescar"></a>
+            <div class="dropdown R-dropdown">
+                <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="{{filterValue}}">
+                    {{defaultFilter}}
+                </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" value="1" href="#">All</a>                    
+                    <a class="dropdown-item" value="2" href="#">Accepted</a>
+                    <a class="dropdown-item" value="3" href="#">Edited</a>
+                    <a class="dropdown-item" value="4" href="#">Pending</a>
+                    <a class="dropdown-item" value="5" href="#">Conflict</a>
+                    <a class="dropdown-item" value="6" href="#">Empty subtitles</a>
+                    <a class="dropdown-item" value="7" href="#">Text overflow</a>
+                </div>
+            </div>
+        </div>
+        <div class="R-header f1 R-mark col-md-3">
+            <p>Mark to validate</p>
+        </div>
+    </div>
+    <div class="table-wrapper">
+        <div id="emptyResults" class="center"></div>
+        <table class="table">
+            <thead class="sr-only">
+                <tr>
+                    <th scope="col">in/out</th>
+                    <th scope="col">{{originalLanguage}} {{translatedLanguage}}</th>
+                    <th scope="col">Filter</th>
+                    <th scope="col">For-reviews</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each subtitles}}
+                <tr class="subtitle-box-view" data-props-model="viewModel.getModelByIndex({{this}})" data-replace-html="true"></tr>
+                {{/each}}	                         
+            </tbody>
+        </table>
+    </div>

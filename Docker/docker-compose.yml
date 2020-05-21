@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+    spm_api:
+        image: spm-api:latest
+        networks:
+            - easytv_net
+        ports:
+            - "8085:80"
+
+    spm_frontend:
+        image: spm-frontend:0.1.0
+        networks:
+            - easytv_net
+        ports: 
+            - "8084:80"
+networks:
+    easytv_net:
+        external: true

@@ -1,0 +1,20 @@
+{toc}
+
+h1.Documentació Maquetació
+
+h2. R-header
+La capçalera de Digition es compon de tres divs principalment. Un Anomenat R-header que engloba a:
+* R-header-left
+* R-header-right
+
+Per tal de posicionar tot el xiringuito hem fet servir flex 
+Definint R-header com a display:flex i justify content: space between per tal que els dos divs de dins es situin als extrems.
+Per tal que no s'encavalquin posem un min-width de 538px al div situat a l'esquerra (R-header-left)
+El següent vídeo o il·lustra:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5_SOzkOSoI8" frameborder="0" allowfullscreen></iframe>
+
+h2. CSS
+
+h3.nomenclatura:
+Pels css farem servir la nomenclatura definida a https://confluence.tv3.cat/display/externs/Directrius+de+nomenclatura+d%27estils+CSS?src=search 

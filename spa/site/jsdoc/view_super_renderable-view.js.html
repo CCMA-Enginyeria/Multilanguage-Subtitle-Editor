@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: view/super/renderable-view.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: view/super/renderable-view.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Aquesta vista rendertiza el template que s'hagi definit dins de l'atribut templateName.
+ * &lt;br/>
+ * Aquesta vista no conté view-model, per tant, només s'hauria d'utilitzar en vistes 
+ * que no tenen model de dades assignat o el seu model de dades estigui a una vista pare.
+ * &lt;br/>
+ * L'arquetype és : view/renderable-view.js
+ * @module view/super/renderable-view
+ * @requires module:view/super/base
+ */
+
+define(['./base'], function (BaseModul) {
+  var RenderableView = BaseModul.extend({
+
+    /*
+     * -----------------------------------------------
+     * Configuració bàsica
+     * -----------------------------------------------
+     */
+    templateName: null,
+    debugButtonTemplateName: 'debug-button',
+
+    /*
+     * -----------------------------------------------
+     * Inicialització del mòdul
+     * -----------------------------------------------
+     */
+    initialize: function () {
+      BaseModul.prototype.initialize.apply(this, arguments);
+      this.props = this.getProps();
+      this.render();
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada per obtenir les propietats
+     * -----------------------------------------------
+     */
+    getProps: function (argument) {
+      var props = this.$el.data('props')
+      this.$el.removeData('props');
+      return props || {};
+    },
+
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada abans del mètode render
+     * -----------------------------------------------
+     */
+    beforeRender: function (onFinishCallback) {
+      onFinishCallback();
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada abans del mètode render
+     * -----------------------------------------------
+     */
+    render: function () {
+      if (!this.templateName) {
+        return;
+      }
+      this.getTemplate(_.result(this, 'templateName'), _.bind(function (tpl) {
+        this.beforeRender(_.bind(function () {
+          this.dettachChildrenViews();
+          this.getNextElementWithTemplate(tpl, _.bind(function (nextEl) {
+            this.insertNewEl(nextEl);
+            this.prepareAfterRender();
+          }, this));
+        }, this));
+      }, this));
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada després de renderitzar-se
+     * -----------------------------------------------
+     */
+    afterRender: function () {
+      this.$el
+        .addClass('view-attached')
+        .trigger('attached', {
+          origin: this.className
+        })
+        .find('*[class*=-view]:not([class*=view-attached])')
+        .addClass('view-attached')
+        .trigger('attached', {
+          origin: this.className
+        });
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada després de renderitzar-se
+     * -----------------------------------------------
+     */
+    prepareAfterRender: function () {
+      if (this.$el.parents('.prerendering').length === 0) {
+        this.afterRender();
+      } else {
+        var onAttachedReceived = _.bind(function (ev) {
+          if (this.el === ev.target) {
+            this.$el.off('attached', onAttachedReceived);
+            this.afterRender();
+          }
+        }, this);
+        this.$el.on('attached', onAttachedReceived);
+      }
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que retornarà les dades que es passaran al template
+     * -----------------------------------------------
+     */
+    getRenderData: function () {
+      return {
+        data: this.$el.data()
+      };
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada a l'hora de destruir el mòdul
+     * -----------------------------------------------
+     */
+    destroy: function () {
+      this.$el.removeData();
+      BaseModul.prototype.destroy.apply(this, arguments);
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que retornarà el codi HTML que s'afegirà a l'element
+     * -----------------------------------------------
+     */
+    renderTemplateWithData: function (tpl, data) {
+      return tpl(data);
+    },
+
+    /*
+     * -----------------------------------------------
+     * Retorna el pròxim element que es renderitzarà
+     * -----------------------------------------------
+     */
+    getNextElementWithTemplate: function (tpl, callback) {
+      var el = this.renderTemplateWithData(tpl, this.getRenderData());
+      el = this.wrapContentInsidePrerendering(el);
+      this.renderDebugButton(el, _.bind(function (el) {
+        this.beforeCreateSubviews(el);
+        this.initSubviewsForNewEl(el);
+        var renderContent = this.removePrerenderWrapper(el);
+        callback(renderContent);
+      }, this));
+    },
+
+    /*
+     * -----------------------------------------------
+     * Inserta el nou element rendertizat
+     * -----------------------------------------------
+     */
+    insertNewEl: function (el) {
+      if (this.$el.data('replaceHtml')) {
+        el.data('replaceHtml', el.data('replaceHtml') !== false);
+        var data = this.$el.data();
+        this.$el.replaceWith(el);
+        this.setElement(el);
+        this.$el.data(_.extend(data, this.$el.data())).addClass(this.name + '-replaced-view');
+      } else {
+        this.$el.html(el);
+      }
+
+    },
+
+    /*
+     * -----------------------------------------------
+     * Funció que serà cridada abans de crear les subvistes
+     * -----------------------------------------------
+     */
+    beforeCreateSubviews: function (el) {
+      this.assignProps(el);
+    },
+
+    /*
+     * -----------------------------------------------
+     * Assignació de propietats a les vistes filles
+     * -----------------------------------------------
+     */
+    assignProps: function (el) {
+      var props,
+        propName,
+        that = this;
+
+      el.find('*[class*=-view]').each(function (i, view) {
+        view = $(view);
+        props = {};
+        _.each(view.data(), function (v, k) {
+          if (k.indexOf('props') === 0) {
+            propName = k.substring(5).toLowerCase();
+            props[propName] = _.reduce(v.split('.'), that.getPropValue, that);
+          }
+        });
+        view.data('props', props);
+      })
+    },
+
+    /*
+     * -----------------------------------------------
+     * Envolcalla l'element per poder afegir-ho com a fill
+     * -----------------------------------------------
+     */
+    wrapContentInsidePrerendering: function (el) {
+      var prerenderTag = this.getPrerenderTagName(el);
+      return $($.parseHTML('&lt;' + prerenderTag + ' class="prerendering">' + el + '&lt;/' + prerenderTag + '>'));
+    },
+
+    /*
+     * -----------------------------------------------
+     * Retorna el tagName del node on es ficarà el contingut
+     * -----------------------------------------------
+     */
+    getPrerenderTagName: function (el) {
+      this.isTr = el.trim().indexOf('&lt;tr') === 0;
+      return this.isTr ? 'table' : 'div';
+    },
+
+    /*
+     * -----------------------------------------------
+     * Esborra l'envolcall de l'element a renderitzar
+     * -----------------------------------------------
+     */
+    removePrerenderWrapper: function (el) {
+      return this.isTr ? el.find('tr') : el.children();
+    },
+
+
+    /*
+     * -----------------------------------------------
+     * Inicialitza les vistes filles
+     * -----------------------------------------------
+     */
+    initSubviewsForNewEl: function (el) {
+      ModulJitpub.refreshFromNode(el, {
+        parent: this
+      });
+      this.childrenViews = _.filter(this.childrenViews, function (v, i) {
+        return !v.shoulRemoveFromParentView();
+      });
+      ModulJitpub.cleanDettachedModuls();
+    },
+
+    /*
+     * -----------------------------------------------
+     * Desenganxa les vistes filles per poder ser reaprofitades
+     * -----------------------------------------------
+     */
+    dettachChildrenViews: function () {
+      _.each(this.childrenViews, function (v) {
+        v.detach();
+      });
+    },
+
+    /*
+     * -----------------------------------------------
+     * Retorna el valor d'una propietat
+     * -----------------------------------------------
+     */
+    getPropValue: function (obj, key) {
+      var functionRegex = /(.*[\(]*)\(([^)]+)\)/,
+        functionRegexResult = functionRegex.exec(key);
+      if (functionRegexResult &amp;&amp; functionRegexResult.length >= 2) {
+        return obj[functionRegexResult[1]].apply(obj, functionRegexResult[2].split(','));
+      } else {
+        return obj ? _.result(obj, key) : null;
+      }
+    },
+
+    /*
+     * -----------------------------------------------
+     * Determina si la vista ha de pintar el botó de debug
+     * -----------------------------------------------
+     */
+    hasDebugButton: function () {
+      return false;
+    },
+
+    /*
+     * -----------------------------------------------
+     * Determina si estem en mode debug
+     * -----------------------------------------------
+     */
+    hasDebugMode: function () {
+      return false;
+    },
+
+    /*
+     * -----------------------------------------------
+     * Retorna les dades que es pintaran en el botó de debug
+     * -----------------------------------------------
+     */
+    getDebugData: function () {
+      return {
+        templateName: this.templateName,
+        viewName: this.name
+      };
+    },
+
+    /*
+     * -----------------------------------------------
+     * Mètode per pintar el botó de debug
+     * -----------------------------------------------
+     */
+    renderDebugButton: function (el, callback) {
+      if (window.isDebugMode &amp;&amp; this.hasDebugButton()) {
+        this.getTemplate(this.debugButtonTemplateName, _.bind(function (tpl) {
+          var debugEl = tpl(this.getDebugData());
+          el.prepend(debugEl);
+          callback(el);
+        }, this));
+      } else {
+        callback(el);
+      }
+    }
+  });
+  return RenderableView;
+
+
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-model_asset.html">model/asset</a></li><li><a href="module-model_asset-clipboard-collection.html">model/asset-clipboard-collection</a></li><li><a href="module-model_asset-collection.html">model/asset-collection</a></li><li><a href="module-model_asset-hqstate.html">model/asset-hqstate</a></li><li><a href="module-model_asset-media.html">model/asset-media</a></li><li><a href="module-model_asset-medias.html">model/asset-medias</a></li><li><a href="module-model_asset-paginator.html">model/asset-paginator</a></li><li><a href="module-model_asset-type.html">model/asset-type</a></li><li><a href="module-model_auth-token.html">model/auth-token</a></li><li><a href="module-model_camps-collection.html">model/camps-collection</a></li><li><a href="module-model_clip.html">model/clip</a></li><li><a href="module-model_digition-app.html">model/digition-app</a></li><li><a href="module-model_feature.html">model/feature</a></li><li><a href="module-model_feature-collection.html">model/feature-collection</a></li><li><a href="module-model_folder.html">model/folder</a></li><li><a href="module-model_folder-collection.html">model/folder-collection</a></li><li><a href="module-model_folder-detail.html">model/folder-detail</a></li><li><a href="module-model_folder-detail-info.html">model/folder-detail-info</a></li><li><a href="module-model_formats.html">model/formats</a></li><li><a href="module-model_generic-modal.html">model/generic-modal</a></li><li><a href="module-model_group.html">model/group</a></li><li><a href="module-model_hqstate.html">model/hqstate</a></li><li><a href="module-model_hqstate-collection.html">model/hqstate-collection</a></li><li><a href="module-model_keyframe.html">model/keyframe</a></li><li><a href="module-model_keyframes-collection.html">model/keyframes-collection</a></li><li><a href="module-model_keyframes-timeline.html">model/keyframes-timeline</a></li><li><a href="module-model_llistat-groups.html">model/llistat-groups</a></li><li><a href="module-model_login-id.html">model/login-id</a></li><li><a href="module-model_me.html">model/me</a></li><li><a href="module-model_me-features.html">model/me-features</a></li><li><a href="module-model_me-folder.html">model/me-folder</a></li><li><a href="module-model_me-group.html">model/me-group</a></li><li><a href="module-model_me-preferences.html">model/me-preferences</a></li><li><a href="module-model_me-search.html">model/me-search</a></li><li><a href="module-model_me-user.html">model/me-user</a></li><li><a href="module-model_me-user-groups.html">model/me-user-groups</a></li><li><a href="module-model_notification.html">model/notification</a></li><li><a href="module-model_notification-collection.html">model/notification-collection</a></li><li><a href="module-model_player.html">model/player</a></li><li><a href="module-model_region.html">model/region</a></li><li><a href="module-model_region-collection.html">model/region-collection</a></li><li><a href="module-model_root-folder.html">model/root-folder</a></li><li><a href="module-model_search.html">model/search</a></li><li><a href="module-model_super_authorization.html">model/super/authorization</a></li><li><a href="module-model_super_authorization-collection.html">model/super/authorization-collection</a></li><li><a href="module-model_super_authorization-model.html">model/super/authorization-model</a></li><li><a href="module-model_super_submodel-collection.html">model/super/submodel-collection</a></li><li><a href="module-model_super_submodel-model.html">model/super/submodel-model</a></li><li><a href="module-model_task.html">model/task</a></li><li><a href="module-model_task-copy.html">model/task-copy</a></li><li><a href="module-model_task-create-clip.html">model/task-create-clip</a></li><li><a href="module-model_task-delete.html">model/task-delete</a></li><li><a href="module-model_task-move.html">model/task-move</a></li><li><a href="module-model_task-sendto-cart.html">model/task-sendto-cart</a></li><li><a href="module-model_tipus-material.html">model/tipus-material</a></li><li><a href="module-model_video-format.html">model/video-format</a></li><li><a href="module-model_video-format-collection.html">model/video-format-collection</a></li><li><a href="module-view-model_asset-detail.html">view-model/asset-detail</a></li><li><a href="module-view-model_asset-head.html">view-model/asset-head</a></li><li><a href="module-view-model_asset-list.html">view-model/asset-list</a></li><li><a href="module-view-model_asset-row.html">view-model/asset-row</a></li><li><a href="module-view-model_card.html">view-model/card</a></li><li><a href="module-view-model_clip-creator.html">view-model/clip-creator</a></li><li><a href="module-view-model_container.html">view-model/container</a></li><li><a href="module-view-model_container-info.html">view-model/container-info</a></li><li><a href="module-view-model_digition-app.html">view-model/digition-app</a></li><li><a href="module-view-model_folder.html">view-model/folder</a></li><li><a href="module-view-model_folder-navigator.html">view-model/folder-navigator</a></li><li><a href="module-view-model_folder-tree.html">view-model/folder-tree</a></li><li><a href="module-view-model_generic-modal.html">view-model/generic-modal</a></li><li><a href="module-view-model_generic-modal-container.html">view-model/generic-modal-container</a></li><li><a href="module-view-model_header.html">view-model/header</a></li><li><a href="module-view-model_hqstate.html">view-model/hqstate</a></li><li><a href="module-view-model_keyframes.html">view-model/keyframes</a></li><li><a href="module-view-model_keyframes-mosaic.html">view-model/keyframes-mosaic</a></li><li><a href="module-view-model_keyframes-row.html">view-model/keyframes-row</a></li><li><a href="module-view-model_keyframes-selection.html">view-model/keyframes-selection</a></li><li><a href="module-view-model_keyframes-timeline.html">view-model/keyframes-timeline</a></li><li><a href="module-view-model_login.html">view-model/login</a></li><li><a href="module-view-model_login-container.html">view-model/login-container</a></li><li><a href="module-view-model_me-folder-selector.html">view-model/me-folder-selector</a></li><li><a href="module-view-model_notification-row.html">view-model/notification-row</a></li><li><a href="module-view-model_notifications-messages.html">view-model/notifications-messages</a></li><li><a href="module-view-model_player.html">view-model/player</a></li><li><a href="module-view-model_player-controls.html">view-model/player-controls</a></li><li><a href="module-view-model_search.html">view-model/search</a></li><li><a href="module-view-model_search-box.html">view-model/search-box</a></li><li><a href="module-view-model_search-box-grups.html">view-model/search-box-grups</a></li><li><a href="module-view-model_search-header.html">view-model/search-header</a></li><li><a href="module-view-model_task.html">view-model/task</a></li><li><a href="module-view-model_task-row.html">view-model/task-row</a></li><li><a href="module-view-model_toolbar.html">view-model/toolbar</a></li><li><a href="module-view_asset-detail.html">view/asset-detail</a></li><li><a href="module-view_asset-head.html">view/asset-head</a></li><li><a href="module-view_asset-list.html">view/asset-list</a></li><li><a href="module-view_asset-row.html">view/asset-row</a></li><li><a href="module-view_basic-template.html">view/basic-template</a></li><li><a href="module-view_card.html">view/card</a></li><li><a href="module-view_card-input.html">view/card-input</a></li><li><a href="module-view_card-input-assettype.html">view/card-input-assettype</a></li><li><a href="module-view_card-input-data-user.html">view/card-input-data-user</a></li><li><a href="module-view_card-input-date.html">view/card-input-date</a></li><li><a href="module-view_card-input-group.html">view/card-input-group</a></li><li><a href="module-view_card-input-medias.html">view/card-input-medias</a></li><li><a href="module-view_card-input-select.html">view/card-input-select</a></li><li><a href="module-view_card-input-text.html">view/card-input-text</a></li><li><a href="module-view_card-input-textarea.html">view/card-input-textarea</a></li><li><a href="module-view_card-input-user.html">view/card-input-user</a></li><li><a href="module-view_clip-creator.html">view/clip-creator</a></li><li><a href="module-view_container.html">view/container</a></li><li><a href="module-view_container-info.html">view/container-info</a></li><li><a href="module-view_datepicker.html">view/datepicker</a></li><li><a href="module-view_debug.html">view/debug</a></li><li><a href="module-view_digition-app.html">view/digition-app</a></li><li><a href="module-view_feedback.html">view/feedback</a></li><li><a href="module-view_folder.html">view/folder</a></li><li><a href="module-view_folder-loading.html">view/folder-loading</a></li><li><a href="module-view_folder-navigator.html">view/folder-navigator</a></li><li><a href="module-view_folder-tree.html">view/folder-tree</a></li><li><a href="module-view_full-card.html">view/full-card</a></li><li><a href="module-view_generic-modal.html">view/generic-modal</a></li><li><a href="module-view_generic-modal-container.html">view/generic-modal-container</a></li><li><a href="module-view_header.html">view/header</a></li><li><a href="module-view_hqstate.html">view/hqstate</a></li><li><a href="module-view_keyframes.html">view/keyframes</a></li><li><a href="module-view_keyframes-mosaic.html">view/keyframes-mosaic</a></li><li><a href="module-view_keyframes-row.html">view/keyframes-row</a></li><li><a href="module-view_keyframes-selection.html">view/keyframes-selection</a></li><li><a href="module-view_keyframes-timeline.html">view/keyframes-timeline</a></li><li><a href="module-view_login.html">view/login</a></li><li><a href="module-view_login-container.html">view/login-container</a></li><li><a href="module-view_me-folder-selector.html">view/me-folder-selector</a></li><li><a href="module-view_notification-row.html">view/notification-row</a></li><li><a href="module-view_notifications-messages.html">view/notifications-messages</a></li><li><a href="module-view_paginator.html">view/paginator</a></li><li><a href="module-view_player.html">view/player</a></li><li><a href="module-view_player-controls.html">view/player-controls</a></li><li><a href="module-view_popover.html">view/popover</a></li><li><a href="module-view_resizable.html">view/resizable</a></li><li><a href="module-view_scrollable.html">view/scrollable</a></li><li><a href="module-view_search.html">view/search</a></li><li><a href="module-view_search-box.html">view/search-box</a></li><li><a href="module-view_search-box-grups.html">view/search-box-grups</a></li><li><a href="module-view_search-header.html">view/search-header</a></li><li><a href="module-view_super_base.html">view/super/base</a></li><li><a href="module-view_super_renderable-view.html">view/super/renderable-view</a></li><li><a href="module-view_super_vm-view.html">view/super/vm-view</a></li><li><a href="module-view_task.html">view/task</a></li><li><a href="module-view_task-row.html">view/task-row</a></li><li><a href="module-view_toolbar.html">view/toolbar</a></li><li><a href="module-view_tooltip.html">view/tooltip</a></li><li><a href="module-view_vendor_bootstrap-datetimepicker.html">view/vendor/bootstrap-datetimepicker</a></li><li><a href="view-model_full-card.module_js.html">js</a></li></ul><h3>Classes</h3><ul><li><a href="jQuery.html">jQuery</a></li><li><a href="jQuery.fn.html">fn</a></li><li><a href="jQuery.fn.datetimepicker.html">datetimepicker</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 14 2017 17:40:40 GMT+0100 (Hora estándar romance)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{{!-- <div class="col-md-12">
+<h1><div class="col-md-6">{{originalLanguage}} --> {{outputLanguage}}</div></h1>
+
+</div> --}}
+<div class="container-fluid A-easytv-subtitles {{#if isReviewer}}supervisor{{/if}}">
+    <div class="row">
+                <div class="col-sm">
+                    <h1>Subtitles {{#if isReviewer}}Evaluator{{else}}Reviewer{{/if}}</h1>
+                </div>
+                <div class="col-sm right exit-contact">
+                        <div class="contact"><span>Contact:  </span>easytv_coordinacio@ccma.cat</div>
+                        <div class="exit">
+                            <button type="button" class="btn btn-outline-secondary return-to-crwdplat-action">Exit <img src="img/exit.svg" alt="Exit"></button>
+                        </div>
+                    {{!-- <div class="contact">Exit<a href="#" class="return-to-crwdplat-action"><img src="img/exit.svg" alt="Exit"></a></div> --}}
+
+                    {{!-- <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="return-to-crwdplat-action"><img src="img/exit.svg" alt="Exit"></a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Subtitles</li>
+                        </ol>
+                    </nav> --}}
+                </div>
+    </div>
+
+    <div class="row app-container subtitles-logic-view" data-state="{{state}}" data-jobid="{{jobid}}"/>
+    <div class="row R-interaction white-background">
+        <div class="col R-pause">
+            <input type="checkbox" class="typing-behaviour-action" checked="false">Pause video while typing
+            {{!-- <input type="checkbox" class="change-focus-behavior-action" checked="false">Scroll to Focused box --}}
+
+        </div>
+        <button id="hiddenModalButton" hidden data-toggle="modal" data-target="#exampleModal"/>
+        {{#if contentLoaded}}
+            <div class="col center">
+                <input class="btn btn-primary save-progress-action" id="saveButton" type="submit" value="Save" data-toggle="modal"/>
+                
+                {{#if enableReset}}
+                    {{#if isReviewer}}
+                        <input class="btn btn-warning reset-task-action"  id="resetButton" type="submit" value="Evaluate" data-toggle="modal"/>
+                        {{!-- <input class="btn btn-primary finish-task-action"  id="finishButton" type="submit" value="Finish" data-toggle="modal" disabled="true"/> --}}
+                    {{else}}
+                    <span class="d-inline-block tooltip-view finish-task-action" tabindex="0" data-toggle="tooltip" title="You must accept title and synopsis to finish the job" disabled="true">
+                        <input class="btn btn-primary finish-task-action" style="pointer-events: none;" id="finishButton" type="submit" value="Finish" data-toggle="modal" disabled="true"/>
+                    </span>
+                    {{/if}}
+                {{else}}
+                {{#if isReviewer}}<input class="btn btn-danger reject-progress-action" id="rejectButton" data-toggle="modal" type="submit" value="Reject"/>{{/if}}
+                    <span class="d-inline-block tooltip-view finish-task-action" tabindex="0" data-toggle="tooltip" title="You must accept title and synopsis to finish the job" disabled="true">
+                        <input class="btn btn-primary finish-task-action" style="pointer-events: none;" id="finishButton" type="submit" value="Finish" data-toggle="modal" disabled="true"/>
+                    </span>
+                {{/if}}
+            </div>
+        {{/if}}
+        <div class="col"></div>
+    </div>
+</div>

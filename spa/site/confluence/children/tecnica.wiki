@@ -1,0 +1,15 @@
+{toc}
+
+${project.summary}
+
+${project.dependencies}
+
+h3. Links relacionats
+Svn : ${scm-svn.url}
+Job snapshot : http://jenkins.pub.dtvc.local/view/Digition/job/digition-frontend-webapp-build-snapshot-deploy/
+Job Release : http://jenkins.pub.dtvc.local/view/Digition/job/digition-frontend-webapp-build-release-deploy/
+h4. Documentació
+* Documentació Projecte: https://confluence.tv3.cat/display/ENG/Digition+3.0+-+Digition+frontend
+* Documentació Desenvolupament: https://confluence.tv3.cat/display/ENG/
+Digition+3.0+-+Digition+frontend+-+Desenvolupament
+* Documentació codi: http://digition-test.dtvc.local/doc/

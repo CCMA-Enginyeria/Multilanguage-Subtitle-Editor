@@ -1,0 +1,12 @@
+h1. Introducció
+
+WebView frontend de l'aplicació Híbrida Digition (.net + html)
+
+Al paquet trobarem els recursos de la webview
+S'allotjarà com a webapp a un apache sota http://digition.pub.dtvc.local
+
+h1. Subdominis
+Desenvolupament: http://digition-dev.pub.dtvc.local
+Test: http://digition-test.pub.dtvc.local
+PRE: http://digition-pre.pub.dtvc.local
+PRO: http://digition.pub.dtvc.local

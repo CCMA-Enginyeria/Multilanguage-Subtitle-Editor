@@ -1,0 +1,19 @@
+**/target
+/spa/disseny/node_modules/
+/spa/disseny/npm-debug*.log
+/spa/disseny/package-lock.json
+/videotest.mp4
+/package.json
+/package-lock.json
+/node_modules
+/exampleNode.json
+/index.js
+# -- Sistemes Operatius ------------------------------
+
+# Linux
+.*
+!.gitignore
+!.gitconfig
+*~
+
+

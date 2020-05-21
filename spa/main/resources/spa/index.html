@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+            <!-- meta -->
+        <meta http-equiv="x-ua-compatible" content="IE=11">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- font -->
+
+        <!-- styles -->
+        <!--link href="css/vendor/bootstrap.css?v=${project.version}" rel="stylesheet" type="text/css"-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="js/vendor/jquery.js?v=${project.version}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/subtitles.css">
+        <link rel="stylesheet" href="css/easytv-subtitles.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        
+        <!--link href="css/subtitles.css?v=${project.version}" rel="stylesheet" type="text/css">
+            <link href="css/easytv.css?v=${project.version}" rel="stylesheet" type="text/css">
+            <link href="css/spa-app.css?v=${project.version}" rel="stylesheet" type="text/css"-->
+        <!-- <link href="js/vendor/video-js/video-js.scss?v=${project.version}" rel="stylesheet">             -->
+        <link href="css/video-js.css?v=${project.version}" rel="stylesheet">
+        <!-- script -->
+        <!-- vendor (sense ordre alfabètic) -->
+        <script src="js/vendor/video.js"></script>
+        
+        <script src="js/vendor/require.js?v=${project.version}"></script>
+        <script src="js/vendor/json2.js?v=${project.version}"></script>
+        <script src="js/vendor/underscore.js?v=${project.version}"></script>
+        <script src="js/vendor/backbone.js?v=${project.version}"></script>
+        <script src="js/vendor/Handlebars.js?v=${project.version}"></script>
+        <script src="js/vendor/cuepoints.js?v=${project.version}"></script>
+        <script src="js/vendor/subtitles.js?v=${project.version}"></script>
+        <script src="js/plugin/loader.js?v=${project.version}"></script>
+        
+        <!--<Deject>-->
+        <script src="js/vendor/text.js?v=${project.version}"></script>
+        <script src="js/vendor/hbs.js?v=${project.version}"></script>
+        <script src="js/vendor/hbstemplate.js?v=${project.version}"></script>
+        <!--<Deject>-->
+        <script src="js/vendor/xdr.js?v=${project.version}"></script>
+        <!-- <script src="js/vendor/bootstrap.js?v=${project.version}"></script> -->
+
+        <!-- config -->
+        <script src="js/config/paths.js?v=${project.version}"></script>
+
+        <!-- views super -->
+        <script src="js/view/super/modul.js?v=${project.version}"></script>
+
+        <!-- template-helper (ordre alfabètic) -->
+        <script src="js/template-helper/ifeq.js?v=${project.version}"></script>
+        <script src="js/template-helper/stringify.js?v=${project.version}"></script>
+        <script src="js/template-helper/ifnoteq.js?v=${project.version}"></script>
+        <script src="js/template-helper/ifcond.js?v=${project.version}"></script>
+        <!-- plugin -->
+        <script src="js/plugin/loader.js?v=${project.version}"></script>
+        <!-- init -->
+        <script src="js/app.js?v=${project.version}"></script>
+        <script type="text/javascript">
+            //            
+            window.GLOBALCONFIGURATION = {
+                //Configuration for subtitlesrenderer
+                "SUBTITLES": {
+                    //Subtitle start threshold
+                    "BEGINCUEPOINTSMARGIN": {
+                        "POSITIVE": 500,
+                        "NEGATIVE": 0,
+                    },
+                    //Subtitle end threshold
+                    "ENDCUEPOINTSMARGIN": {
+                        "POSITIVE": 500,
+                        "NEGATIVE": 0
+                    }
+                },
+                //Configuration for cuepoints
+                "CUEPOINTSMARGIN": {
+                    "POSITIVE": 0,
+                    "NEGATIVE": 100,
+                },
+                
+            };
+        </script>
+    </head>
+	<body class="A-easytv-subtitles">
+        <div class="A-easytv-subtitles spa-app-view" data-replace-html="false"></div>
+        <div class="modal fade modal-template-view in" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">        
+          </div>
+        <div class="modal fade modal-title-description-view" data-backdrop="static" data-keyboard="false" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+        aria-hidden="true">
+        
+        <!-- <div id="loader"></div> -->
+    </body>
+</html>
+

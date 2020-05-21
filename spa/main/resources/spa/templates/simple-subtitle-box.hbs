@@ -1,0 +1,14 @@
+
+{{!-- <div class="on-click-box-action {{focus}} simple-subtitle-box-style" >
+    <p><span class="begintime">{{begintime}}</span> <span class="endtime"> {{endtime}}</span>     </p>
+    <p class="subtitle"> {{newsubt}}</p>    
+</div> --}}
+<div class="R-subtitle on-click-box-action {{#if conflict}}reject{{/if}} {{#if focus}}focus{{/if}} 
+    {{#if accepted}}accepted{{/if}} {{#if editionOnCourse}}yellow{{/if}}">
+          <div class="R-up on-click-box-action">
+              <div class="R-tcin on-click-box-action">{{begintime}}</div>
+              <div class="R-tcout on-click-box-action">{{endtime}}</div>
+          </div>
+          <div class="R-down on-click-box-action">{{newsubt}}</div>
+          {{#if dualText}}<div class="R-down on-click-box-action">{{newsubt2}}</div>{{/if}}
+      </div>

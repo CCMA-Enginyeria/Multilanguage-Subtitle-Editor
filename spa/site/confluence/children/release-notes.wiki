@@ -1,0 +1,239 @@
+h2. 4.1835.0
+* ESDGP-2303: Digition resultats cercador - Deshabilitar la icona "Treure de la carpeta" per als resultats de cerca
+* EQPUB-3180: Afegit avís en cas de no tenir carret sel·leccionat.
+* ESDGP-2392: Al crear clip, ja retorna les dades de dadesCreacio pels tipus materials.
+* ESDGP-2444: Bugfixes
+
+h2. 4.1832.3
+* EQPUB-3180: Petits ajustos de frontend
+
+h2. 4.1832.2
+* EQPUB-3165: Filtre de font al cercador
+
+h2. 4.1832.0
+* ESDGP-2284: Digition cercador - Implementar desplegables amb select2 - per facilitar la multiselecció i la cerca dins dels desplegables
+* ESDGP-2352: Digition frontend - corregir profiles en enviar a DTY
+* ESDGP-2305: Digition keyframes - correcció bug visualització keyframes
+* ESDGP-2307: Digition 3 fitxa - recuperar el mostrar el títol complet
+* ESDGP-2296: Digition3 - modificar textos dels menús i confirmacions - perquè siguin més clars
+* ESDGP-2306: Digition3 resultats - capturar error d’autenticació a l'enviar assets a deliverty - per informar a l'usuari què està passant
+* ESDGP-2319: Digition seleccionar carret - protegir carrets no seleccionables - per evitar errors inesperats
+* ESDGP-2320: Digition 3 - implementar la funcionalitat de sel·leccionar /desel·leccionar tots els estrats
+* ESDGP-2242: Digition capçalera - mostrar informació d'espai disponible - per tenir info de l'estat de les cabines
+* Modifiquem certificat intermig de digition-test
+* EQPUB-3085: Afegida la funcionalitat de favorits de carpetes
+
+
+h2. 4.1826.0
+* ESDGP-2318: Digition frontend - coherencia botons
+* EQPUB-3108: consultar_APi_per_mostrar_modals
+
+h2. 4.1825.4
+* EQPUB-3127: Digition 3 login - afegir feedback mentre valida el login - per informar l'usuari que s'est� fent una acci�
+
+h2. 3.1826.0
+* ESDGP-2305: Digition keyframes/estrats - recordar darrera pestanya en IE
+* ESDGP-2295: Digition arbre - reordenar opcions del modal - per fer-ho més usable
+* ESDGP-2252: Digition estrats - recuperar imatge dels estrats - per facilitar navegació
+* ESDGP-2257: Digition 3 arbre - mostrar si una carpeta és de tipus desconegut
+* ESDGP-2214: Digition 3 folder - ordenació per tipus rundown o alfabètic
+* EQPUB-3129: Digition 3 datepicker solucionat bug que feia que el calendari s'obris per sota del visor.
+* ESDGP-2241: Digition fitxa - mostrar carpetes contenidores - per informar on trobem l'asset
+* ESDGP-2304: Digition capçalera - mantenir el nom de l'usuari logat al carregar de nou la plana
+* EQPUB-3050: Digition player - correcció de la posició del player al aplicar zoom al browser
+
+h2. 3.1823.0
+* ESDGP-2145: Digition 3 estrats - afegir interacció amb visor - per poder posicionar-nos als punts seleccionats
+* ESDGP-2131: Digition crear clip - oferir modificar dades clip - per simplificar tasques
+* ESDGP-2203: Digition detall - amagar keyframes i estrats als assets que no siguin del tipus vídeo - Per evitar fer crides innecessàries
+* ESDGP-2280: Digition 3 frontend - modificar assetId per idNumeric
+
+h2. 3.1820.2
+* EQPUB-3055: Flash notification - Correcció detalls notificacions flash.
+
+h2. 3.1820.1
+* EQPUB-3055: Flash notification - Timer que oculta automàticament els flash OK als 5s
+
+h2. 3.1820.0
+* ESDGP-2145: Digition 3 estrats - afegir interacció amb visor - per poder posicionar-nos als punts seleccionats
+
+h2. 3.1817.3
+* EQPUB-3074: Digition assets - canviar la visualització de l'id per assetId - per evitar redundàncies + prettify
+* EQPUB-3055: Digition notificacions - s'ha preparat el codi per poder escollir entre notificacions modals o flash
+
+h2. 3.1817.2
+* EQPUB-3057: Digition cercador - al canvi de grup es perd el contingut dels desplegables
+* EQPUB-3056: Digition crear clip - esborrar tc_in i tc_out quan es crea el clip correctament + prettify
+
+h2. 3.1817.1
+* EQPUB-3053: Digition frontend - Ajustada la gestió de les dates
+** Posat sistema que permet l'escalat dels calendaris i posicionar-los a on hi ha espai lliure per tal que no quedin tallats.
+** Substituida la gestió de les dates de datetimepicker a datepicker
+** separats camps dia i hora per millorar la gestió d'errors i entrada de dades
+** Afegit feedback quan API ens retorna un error al modificar dades d'asset
+** A la fitxa comprovació de format d'hora corregit
+** Arreglats problemes amb els camps no modificats de la fitxa gran
+* EQPUB-3056: Afegits colors verd i vermell per marcar TC-IN i TC-OUT a la zona de keframes
+* EQPUB-3056: Digition crear clip - ajustos funcionament frontend + prettify
+* EQPUB-3068: Afegida icona de carpeta amb línies d'escaleta a la llegenda
+* Mostrar imatge d'error (no hi han continguts) als estrats i keyframes + prettify
+
+h2. 3.1817.0
+* EQPUB-3040: Digition frontend - atacar a la v2 de digition api - per deprecar la versió antiga
+* EQPUB-3040: Digition frontend - limitar les crides múltiples al mateix endpoint (protegir fetch() multiples)
+* Eliminada vista resultats d'assets quan estem a la carpeta arrel.
+* EQPUB-3056: Digition crear clip - ajustos funcionament frontend - Modifiquem les crides cap a l'enpoint de /_clip i fem la crida cap al nou endpoint de /_envia mantenint tots els mateixos paràmetres.
+
+h2. 3.1814.9
+* Augmentat el número d'assets per pàgina a la cerca a 100
+* Fixat camp fitxa per defecte al cercador
+
+h2. 3.1814.8
+* Tornem a pujar templates.dist.js que havia quedat corrupte
+
+h2. 3.1814.7
+* Modificat text de cancel·lació d'edició
+* EQPUB-3024 - Protegir camps de l'asset de la zona de més informació per a que no es pintin de forma incorrecta
+* EQPUB-3014 - (bugfix) Corregit problema a l'hora de seleccionar grups al cercador
+* (core) Aïllat spa-devtools per facilitar la reutilització de l'eina
+* EQPUB-3052 - (bugfix) Afegida protecció per quan arriba perArxiu amb valor null de l'API.
+
+h2. 3.1814.6
+* EQPUB-3045: (bugfix) Error a l'hora guardar un camp a la fitxa
+
+h2. 3.1814.5
+* EQPUB-3039: Amagat contingut de la regió de la fitxa quant es minimitza la regió
+* EQPUB-3037: Correció bug el refresc general de l'arbre només ha de refrescar l'arbre, no els resultats. Correccions JSLINT.
+* ESDGP-1939: Navegació entre estrats d'un assets mitjançant timeline - per poder navegar de forma més ràpida
+* EQPUB-3046: Correció problema l'edició inline del camp Text
+* EQPUB-3045: S'ha solucionat el problema de la doble crida a l'hora de visualitzar el detall d'un asset.
+* EQPUB-3045: S'ha millorat la gestió dels bloquejos per millorar l'experiència d'usuari
+* EQPUB-3024: Digition Fitxa - ajustos frontend a la fitxa per mostrar els camps en funció de l'api i que no surti alert si s'edita i es cancel·la sense modificar.
+
+
+h2. 3.1814.4
+* EQPUB-3037: Correció bug 'El boto de refrescar no refresca el contingut de la carpeta'. Ara actualitza subcarpetes + llistat assets
+* EQPUB-3039: Solucionat problema d'obrir imatges i audios.
+* EQPUB-3039: Ajustats aspectes visuals de l'ajuda, mida icones. Preparada maqueta per implementar la ordenació dels assets de la cerca segons columna desitjada.
+* EQPUB-3039: S'ha relacionat a cada asset el titol dels clips a la cassela de crear clip de treball del player
+* EQPUB-3039: S'ha ajustat els estils de seleccionar keyframe in i out en la àrea de keyframes per tal que es mostrin correctament si es fa sobre el mateix keyframe
+* EQPUB-3039: Corregida navegació per timecode dels keyframes i ajustades icones boles de la llista vertical
+* Ajustos a les icones d'arxiu i perArxiu.
+* Afegim favicon.ico
+
+
+h2. 3.1814.3
+* EQPUB-3039: protecció de repaint si tenim delay de xarxa per tenir els formats, ordre, materials del cercador.
+* EQPUB-3039: Corregit error afegit a l'optimització dels keyframes.
+* EQPUB-3039: S'han afegit avisos si falten dades al crear clip de treball
+* EQPUB-3037: Correció bug per tal de permetre cercar sense cap text. Correccions JSLINT.
+
+h2. 3.1814.2
+* EQPUB-3039: Correcio event enter al modals
+* EQPUB-3039: Keyframes, solucionat problema amb marcar el TCIn i TCout a la primera plana i primer keyframe. Millora de rendiment.
+* EQPUB-3039: Correcio datepicker comença amb dilluns
+* EQPUB-3037: Correció bug si cliquem a una carpeta, fem una cerca dins d'aquesta carpeta i tornem a clicar sobre la carpeta, es vegin tots els assets d'aquesta carpeta. Correccions JSLINT.
+* EQPUB-3039: Correcció event keypress escape als modals
+* ESDGP-1944: (core) Millora gestió reset submodels
+* EQPUB-3039: accions descrites sobre el login
+* EQPUB-3039: Al modal de crear clip, solucionat problema al escrire el nom del fitxer desti i canviar el directori desti, el nom escrit ja no es reseteja
+* EQPUB-2503: Esborrem confs d'apache de PRE, BETA i PRO, ja que en aquests entorns ho modificarà SECA-Sistemes directament
+
+h2. 3.1814.1
+* EQPUB-3036: Digition - Modificar l'obtenció d'accés a Digition2
+* EQPUB-3021: Corregit scroll automatic als keyframes a l'arribar a la plana inferior
+* EQPUB-3021: (hotfix) - ajsutos de funcionament de opcions de la toolbar (cut,copy,paste,delete), i mantenir la selecció de assets despres de cancelar una tasca d'esborrat (modal).
+* EQPUB-3037 Refresca arbre quan es clica sobre la carpeta
+* ESDGP-1944 Canvi de group i logout-login amb neteja
+
+h2. 3.1814.0
+* EQPUB-3021 optimització de càrrega i infinite-scroll-loading
+* EQPUB-3020 : Digition enviar al carret - ajustos frontend
+* EQPUB-3021 : Optimització events cap als keyframes al premer TCIn o TCOut des del control player.
+* EQPUB-3024: Pintar correctament els camps 'preset' i 'grup' de la fitxa d'edició inline. Afegir estils.
+* EQPUB-3021: Un cop iniciada una tasca sempre es mostren les notificacions
+* EQPUB-3021: Solucionat pintat de keyframes. L'event de pintat es realitza a l'apareixer la plana i no al 1er keyframe
+
+h2. 3.1811.7
+* ESDGP-1939 - Digition estrats - Navegació entre estrats d'un assets mitjançant timeline - per poder navegar de forma més ràpida
+
+h2. 3.1811.6
+* ESDGP-1972 - Digition - Revisio de bloquejos - Per no permetre a un usuari editar un asset en edicio
+
+h2. 3.1811.1
+* ESDGP-1633 - Digition resultats - Oferir passar a online - per poder treballar amb els assets
+
+h2. 3.1808.0
+* EQPUB-2990 - Digition - Aïllar implementació del menú toolbar - Per tenir poder crèixer de forma endreçada
+* ESDGP-1933 - Digition estrats - crear un clip a partir d'un estrat al carret - per simplificar aquesta tasca
+* ESDGP-1818 - Digition estrats - seleccionar els tipus d'estrats - per poder escollir els estrats a visualitzar
+* ESDGP-1565 - Oferir enviar a internet - per poder publicar continguts
+* ESDGP-1633 - Digition resultats - Oferir passar a online - per poder treballar amb els assets
+* ESDGP-1887 - Refactoritzacio marcar i desmarcar per arxiu en un nou model i tests
+* ESDGP-1885 - Digition resultats - adaptar la visualització de continguts segons el tipus d'asset - per poder obrir tots els tipus
+* ESDGP-1634 - Digition resultats - Oferir treure de la carpeta assets - per poder gestionar els recursos
+
+h2. 3.1802.0
+* ESDGP-1609 - Modificar asset a la full-card
+* ESDGP-1743 - Mostrar estrats d'un asset
+* ESDGP-1792 - Llegir el token de les capçaleres de les respostes - per refrescar les sessions
+
+h2. 3.1750.0
+* EQPUB-2935 - Afegim GULP al projecte
+
+h2. 3.1747.0
+* EQPUB-2923 - Maqueta fitxa completa
+* EQPUB-2781 - Obrir selector de carret en finestra emergent
+* ESDGP-1632 - Copiar i moure assets
+* ESDGP-1631 - Més informació de carpeta
+* ESDGP-1656 - Enviar assets al carret
+
+h2. 3.1735.0
+* EQPUB-2793 -Digition testing - parametritzar versió de API - per testejar versions en concret
+* EQPUB-2815 - Digition resultats - ajustos barra d'eines (copy, paste, cut, delete)
+* EQPUB-2874 Ajustar l’enviament d’assets al carret
+
+h2. 3.1717.2
+* Actualitzat la llista d'assets per arreglar problemes d'IE.
+
+h2. 3.1705.0
+* Nova release amb els darrers canvis i per pujar docu al confluence.
+
+h2. 3.1648.0
+* EQPUB-2633: Adaptació a la nova versió d'API.
+* EQPUB-2552: Digition resultats - oferir paginador al llistat d'assets + test
+* EQPUB-2553:  Digition resultats - Afegir opció de selecció d'assets al llistat - per poder treballar amb diferents assets a l'hora
+
+h2. 3.1643.5
+* EQPUB-2509: Digition arbre - Seleccionar carret - perquè l'usuari seleccioni i sàpiga el seu carret (commit_partially_senseTEST)
+* EQPUB-2530: Digition resultats - Mostrar llistat d'assets - per poder accedir als resultats de cerca (Primera aproximació)
+
+h2. 3.1643.3
+* EQPUB-2510 : Digition arbre - Menú contextual arbre - per mostrar opcions a l'usuari
+* EQPUB-2512 : Digition arbre - Mostrar informació de la carpeta de l'arbre
+* EQPUB-2608 : S'ha tocat el pom.xml per fer que els tests de jasmine
+
+h2. 3.1643.2
+* EQPUB-2507 : Digition capçalera - llistar grups i canviar de grup - per escollir on volem treballar
+* EQPUB-2603: Digition arbre - forçar refresc de continguts a tot l'arbre - per actualitzar el llistat de carpete
+
+h2. 3.1643.0
+* EQPUB-2600 : Digition capçalera - integrar login i logout - per disposar d'una capçalera funcional
+
+h2. 3.1634.5
+* EQPUB-2504 : sobre el .net funciona el login amb i sense password. afegim capa de logs temporal
+
+h2. 3.1634.4
+* EQPUB-2504 : llegim el groupname de la petició de login i ho guardem al model
+
+h2. 3.1634.3
+omplim tasques de jenkins a documentació
+
+h2. 3.1634.1
+* arreglats links a confluence
+
+h2. 3.1634.0
+* Primera versió digition-frontend amb integració contínua
+
+h2. 3.1619.0
+* Primera versió, creació

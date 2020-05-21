@@ -1,0 +1,109 @@
+<tr class="{{#if conflict}}reject{{/if}} {{#if focus}}focus{{/if}} 
+    {{#if accepted}}accepted{{/if}} {{#if editionOnCourse}}yellow{{/if}}" {{#if hideBox}} hidden{{/if}}>
+    <td class="on-click-box-action">
+
+            <div class="go-to-begin-action">{{begintime}}</div>
+            <div>{{endtime}}</div>
+
+    </td>
+
+    {{#if_eq id 'credits'}}
+    <td class="on-click-box-action">
+        <div>Credits</div>
+         <a class="center"><img src="img/author.svg" alt="Author" title="Author"></a>
+    </td>
+    {{else}}
+    <td class="on-click-box-action">
+        <div>Source</div>
+        <div class="translated">Translated</div>
+    </td>
+    {{/if_eq}}
+
+    <td class="on-click-box-action">
+        {{#if_eq id 'credits'}}
+        {{else}}
+        <div>{{{origsubt}}}</div>
+        <div>{{{origsubt2}}}</div>
+        {{/if_eq}}
+
+        {{#if focusedClick}}
+            <input class="proposed-modified-action {{#if isRTL}}right-rtl{{/if}}" type="text"  value="{{newsubt}}" {{#if_eq id 'credits'}}disabled{{/if_eq}}>
+            {{#if dualText}}
+                {{#if_not_eq id 'credits'}}
+                    <input class="proposed-modified-action {{#if isRTL}}right-rtl{{/if}}" type="text" value="{{newsubt2}}">
+                    <a class="remove-line-action"><img src="img/minus.svg" alt="Remove" title="Remove line"></a>
+                {{/if_not_eq}}
+                {{#if_eq id 'credits'}}
+                    <input class="proposed-modified-action {{#if isRTL}}right-rtl{{/if}}" type="text" placeholder="{{newsubt2}}">
+                {{/if_eq}}
+            {{else}}
+                <a class="add-line-action"><img src="img/plus.svg" alt="Add" title="Add line"></a>
+            {{/if}}
+        
+        {{else}}
+        <div class="proposed-modified-action translated
+            {{#if isRTL}}right-rtl{{/if}}
+            {{#if reviewerEdited}}
+                validated
+            {{else}}
+                {{#if conflict}}
+                    error
+                {{else}}
+                    {{#if edited}}
+                        corrected                                    
+                    {{else}}
+                        automatic
+                    {{/if}}
+                {{/if}}
+            {{/if}}">
+        <span class="d-inline-block tooltip-view gray-tooltip" data-placement="bottom" data-toggle="tooltip" title="Click to edit">
+            {{newsubt}}
+        </span>
+        </div>
+
+        {{#if dualText}}
+        <div class="proposed-modified-action translated
+            {{#if isRTL}}right-rtl{{/if}}
+            {{#if reviewerEdited}}
+                validated
+            {{else}}
+                {{#if conflict}}
+                    error
+                {{else}}
+                    {{#if edited}}
+                        corrected                                    
+                    {{else}}
+                        automatic
+                    {{/if}}
+                {{/if}}
+            {{/if}}">
+        <span class="d-inline-block tooltip-view gray-tooltip" data-placement="bottom" data-toggle="tooltip" title="Click to edit">
+            {{newsubt2}}
+        </span>
+        </div>
+        {{/if}}
+        {{/if}}
+    </td>
+    
+    <td class="on-click-box-action">
+        <div class="close" {{#if editionOnCourse}}{{else}}hidden{{/if}}><a href="#" class="cancel-edition-action"><img src="img/close.svg" alt="Close" title="Undo change"></a></div>
+        {{#if textOverflow}}<a href="#" class="prevent-default-action"><img src="img/long-text.svg" alt="Large text" title="Large text"></a>{{/if}}
+        {{#if editedUndo}}<a href="#" class="undo-proposed-action"><img src="img/undo.svg" alt="Undo" title="Undo All changes"></a>{{/if}}
+        {{#if reviewerActive}}
+            {{#if conflict}}
+            {{else}}
+                {{#if reviewerEdited}}
+                {{else}}<a href="#" class="reject-subtitle-action"><img src="img/reject.svg" alt="Mark conflict" title="Mark Conflict"></a>
+                {{/if}}
+            {{/if}}
+        {{/if}}     
+
+        {{#if reviewerActive}}
+            {{#if conflict}}
+                <input type="checkbox" class="accept-subtitlebox-action" {{#if accepted}}checked{{/if}} alt="Accept subtitle" title="Accept subtitle"></input>
+            {{/if}}
+        {{else}}
+                <input type="checkbox" class="accept-subtitlebox-action" {{#if accepted}}checked{{/if}} alt="Accept subtitle" title="Accept subtitle"></input>                                            
+        {{/if}}                                  
+    </td>
+</tr>

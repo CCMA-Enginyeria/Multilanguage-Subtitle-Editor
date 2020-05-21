@@ -1,0 +1,79 @@
+
+<div class="R-header">
+  <h2>{{assetName}}</h2> 
+</div>
+
+<div class="R-header">
+  <div>
+    {{!-- <button type="button" class="btn refresh-video-action">
+      Refresh video
+      <img src="img/refresh.svg" alt="Refresh Video">
+    </button> --}}
+    <button type="button" href="#" class="R-edit-title-description btn edit-action" data-toggle="modal" data-target="#exampleModal1">
+      Edit asset data
+    </button>
+  </div> 
+  <div class="R-info">
+    Subtitle: <span id="videoSubCount">No subtitle focused</span>
+  </div>
+  <div>
+    <button type="button" class="btn get-help-action" data-toggle="modal" data-target="#exampleModal">
+      <img src="img/help.svg" alt="Help">
+    </button>
+  </div>
+</div>
+
+
+<div class="R-player subtitles-container" style="width:100%;height:54%;background-color:black;position:relative;">
+  <video id="my-video" class="R-video video-js vjs-default-skin" controls preload="auto">
+    <source src="{{videoToPlay}}" type='{{videoType}}'>
+    <p class="vjs-no-js">
+      Per veure aquest video, JavaScript es necessari      
+    </p>
+  </video>
+  <div id="subtitles" class="subtitles"></div> 
+</div>
+<div class="R-subtitles">
+  <div class="R-wrapper">
+    {{#each subtitles}}
+      <div class="R-subtitle simple-subtitle-box-view focus" data-props-model="viewModel.subtitlesBoxCollectionModel.at({{this}})" data-replace-html="true" />
+    {{/each}}
+  </div>
+</div>
+
+<div class="R-stats">
+  <h3>Stats</h3>
+  <div class="R-data">
+      <div class="T-data">
+          Subtitles <span id="subtitlesLength">0</span>
+      </div>
+      {{#unless reviewerActive}}
+      <div class="T-data viewed">
+          Viewed <span id="viewedNum">0</span>
+      </div>
+      {{/unless}}
+      <div class="T-data accepted">
+          Accepted <span id="acceptedNum">0</span>
+      </div>
+      <div class="T-data edited">
+          Edited <span id="editedNum">0</span>
+      </div>
+      {{#if reviewerActive}}
+      <div class="T-data rejected" align="right">
+           Rejected <span id="rejectedNum">0</span>
+      </div>
+      {{/if}}
+  </div>
+
+  <h4><span id="statsTitle">Accepted</span> <span id="statsPercBar"></span></h4>      
+  <div class="progress">
+      <div class="progress-bar
+      {{#if showViewed}}bg-secondary{{/if}}
+      {{#if showAccepted}}bg-success{{/if}}
+      {{#if showEdited}}bg-primary{{/if}}
+      {{#if showRejected}}bg-danger{{/if}}"
+      id="statsBar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      </div>      
+  </div>
+
+</div>

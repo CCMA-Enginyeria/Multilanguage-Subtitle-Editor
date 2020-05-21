@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- meta -->
+    <meta http-equiv="x-ua-compatible" content="IE=11">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- font -->
+
+    <!-- styles -->
+    <!--link href="css/vendor/bootstrap.css?v=${project.version}" rel="stylesheet" type="text/css"-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/subtitles.css">
+    <link rel="stylesheet" href="css/easytv-subtitles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <!--link href="css/subtitles.css?v=${project.version}" rel="stylesheet" type="text/css">
+        <link href="css/easytv.css?v=${project.version}" rel="stylesheet" type="text/css">
+        <link href="css/spa-app.css?v=${project.version}" rel="stylesheet" type="text/css"-->
+    <!-- <link href="js/vendor/video-js/video-js.scss?v=${project.version}" rel="stylesheet">             -->
+    <link href="css/video-js.css?v=${project.version}" rel="stylesheet">
+    <!-- script -->
+    <!-- vendor (sense ordre alfab&egrave;tic)-->
+    <script src="js/vendor/video.js"></script>
+    <!--script src="js/vendor/jquery.js?v=${project.version}"></script-->
+    <script src="js/vendor/require.js?v=${project.version}"></script>
+    <script src="js/vendor/json2.js?v=${project.version}"></script>
+    <script src="js/vendor/underscore.js?v=${project.version}"></script>
+    <script src="js/vendor/backbone.js?v=${project.version}"></script>
+    <script src="js/vendor/Handlebars.js?v=${project.version}"></script>
+    <script src="js/vendor/cuepoints.js?v=${project.version}"></script>
+    <script src="js/vendor/subtitles.js?v=${project.version}"></script>
+    <script src="js/plugin/loader.js?v=${project.version}"></script>
+
+    <!--<Deject>-->
+    <script src="js/vendor/text.js?v=${project.version}"></script>
+    <script src="js/vendor/hbs.js?v=${project.version}"></script>
+    <script src="js/vendor/hbstemplate.js?v=${project.version}"></script>
+    <!--<Deject>-->
+    <script src="js/vendor/xdr.js?v=${project.version}"></script>
+    <!--script src="js/vendor/bootstrap.js?v=${project.version}"></script-->
+
+
+    <!-- config -->
+    <script src="js/config/paths.js?v=${project.version}"></script>
+
+    <!-- views super -->
+    <script src="js/view/super/modul.js?v=${project.version}"></script>
+
+    <!-- template-helper (ordre alfab&egrave;tic) -->
+    <script src="js/template-helper/ifeq.js?v=${project.version}"></script>
+    <script src="js/template-helper/stringify.js?v=${project.version}"></script>
+    <script src="js/template-helper/ifnoteq.js?v=${project.version}"></script>
+    <script src="js/template-helper/ifcond.js?v=${project.version}"></script>
+    <!-- plugin -->
+    <script src="js/plugin/loader.js?v=${project.version}"></script>
+    <!-- init -->
+    <script src="js/app.js?v=${project.version}"></script>
+    <script type="text/javascript">
+        //            
+        window.GLOBALCONFIGURATION = {
+            //Configuration for subtitlesrenderer
+            "SUBTITLES": {
+                //Subtitle start threshold
+                "BEGINCUEPOINTSMARGIN": {
+                    "POSITIVE": 500,
+                    "NEGATIVE": 0,
+                },
+                //Subtitle end threshold
+                "ENDCUEPOINTSMARGIN": {
+                    "POSITIVE": 500,
+                    "NEGATIVE": 0
+                }
+            },
+            //Configuration for cuepoints
+            "CUEPOINTSMARGIN": {
+                "POSITIVE": 0,
+                "NEGATIVE": 100,
+            },
+        };
+    </script>
+</head>
+
+<body class="A-easytv-subtitles">
+    <!--div class="spa-app-view"></div-->
+
+    <div class="container A-easytv-subtitles supervisor">
+        <div class="row">
+            <div class="col-sm">
+                <h1>Subtitles Supervisor</h1>
+            </div>
+            <div class="col-sm right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><img src="img/home.svg" alt="Home"></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Subtitles</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row app-container">
+            <div class="col-sm R-subtitles">
+                <div class="R-headers">
+                    <div class="R-header f1">
+                        <div>IN</div>
+                        <div>OUT</div>
+                    </div>
+                    <div class="R-header f1">
+                        <div>Catalan</div>
+                        <div>English</div>
+                    </div>
+                    <div class="R-header f1">
+                        <div class="dropdown R-dropdown">
+                            <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                All
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">All</a>
+                                <a class="dropdown-item" href="#">For review</a>
+                                <a class="dropdown-item" href="#">Revised</a>
+                            </div>
+                        </div>
+                        <a href="#" class="R-refresh"><img src="img/refresh.svg" alt="Refrescar"></a>
+                    </div>
+                    <div class="R-header f1 R-mark">
+                        <p>Mark to validate</p>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead class="sr-only">
+                            <tr>
+                                <th scope="col">in/out</th>
+                                <th scope="col">Catalan English</th>
+                                <th scope="col">Filter</th>
+                                <th scope="col">For-reviews</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated validated">I signed up to the gym</div>
+                                </td>
+                                <td>
+                                    <a href="#"><img src="img/undo.svg" alt="Undo"></a>
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                            <tr class="yellow">
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>Aquest es un text molt llarg, t'agradi o no t'agradi. Perqu&egrave; un
+                                        subt&iacute;tol pot
+                                        ser molt llaaaarg, mooolt llaaarg, com saps tres linies de pur contingut. Quina
+                                        cosa més boja.</div>
+                                    <div class="translated corrected">this is a long text like or not, beacause one
+                                        subtitle cant be looooong, very loong by the way, tree lines of pure content,
+                                        what a crazy thing</div>
+                                </td>
+                                <td>
+                                    <a href="#"><img src="img/long-text.svg" alt="Large text"></a>
+                                    <a href="#"><img src="img/undo.svg" alt="Undo"></a>
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                            <tr class="reject">
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated error">I signed up to the gym</div>
+                                </td>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                            </tr>
+                            <tr class="focus">
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic">
+                                        <input type="text" value="I signed up to the gym"></div>
+                                </td>
+                                <td>
+                                    <div class="close">
+                                        <a href="#"><img src="img/close.svg" alt="Close"></a>
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                            <tr class="accepted">
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic corrected">I signed up to the gym</div>
+                                </td>
+                                <td>
+
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic">I signed up to the gym</div>
+                                </td>
+                                <td>
+
+                                    <input type="checkbox">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic validated">I signed up to the gym</div>
+                                </td>
+                                <td>
+
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic validated">I signed up to the gym</div>
+                                </td>
+                                <td>
+
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>00:10:04</div>
+                                    <div>00:11:04</div>
+                                </td>
+                                <td>
+                                    <div>Source</div>
+                                    <div class="translated">Translated</div>
+                                </td>
+                                <td>
+                                    <div>M'he apuntat al gimn&agrave;s</div>
+                                    <div class="translated automatic validated">I signed up to the gym</div>
+                                </td>
+                                <td>
+
+                                    <input type="checkbox" checked>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="col-sm R-video">
+
+                <div class="R-header">
+                    <h2>Com si f&oacute;s ahir cap. 125</h2>
+                    <div class="R-info">
+                        Subtitle: <span>205/1002</span>
+                        <a href="#" data-toggle="modal" data-target="#exampleModal"><img src="img/help.svg"
+                                alt="Help"></a>
+                    </div>
+                </div>
+                <div class="R-player">
+                    <img src="https://pbs.twimg.com/media/DyIr2UiWoAEJRc_.jpg:large" alt="Substituïr pel v&iacute;deo">
+                </div>
+                <div class="R-subtitles">
+                    <div class="R-wrapper">
+                        <div class="R-subtitle focus">
+                            <div class="R-up">
+                                <div class="R-tcin">00:10:20</div>
+                                <div class="R-tcout">00:11:20</div>
+                            </div>
+                            <div class="R-down">
+                                I signed up to the gym
+                            </div>
+                        </div>
+                        <div class="R-subtitle reject">
+                            <div class="R-up">
+                                <div class="R-tcin">00:10:20</div>
+                                <div class="R-tcout">00:11:20</div>
+                            </div>
+                            <div class="R-down">
+                                this is a long text like or not, beacause one
+                                subtitle cant be looooong, very loong by the way, tree lines of pure content,
+                                what a crazy thing
+                            </div>
+                        </div>
+                        <div class="R-subtitle">
+                            <div class="R-up">
+                                <div class="R-tcin">00:10:20</div>
+                                <div class="R-tcout">00:11:20</div>
+                            </div>
+                            <div class="R-down">
+                                Ok
+                            </div>
+                        </div>
+                        <div class="R-subtitle">
+                            <div class="R-up">
+                                <div class="R-tcin">00:10:20</div>
+                                <div class="R-tcout">00:11:20</div>
+                            </div>
+                            <div class="R-down">
+                                I signed up to the gym
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="R-stats">
+                    <h3>stats</h3>
+                    <div class="R-data">
+                        <div class="T-data">
+                            Subtitles <span>1002</span>
+                        </div>
+                        <div class="T-data">
+                            viewed <span>204</span>
+                        </div>
+                        <div class="T-data">
+                            accepted <span>104</span>
+                        </div>
+                        <div class="T-data">
+                            edited <span>100</span>
+                        </div>
+                    </div>
+                    <h4>Revised <span>31%</span></h4>
+                    <div class="progress">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 31%" aria-valuenow="31"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row R-interaction white-background">
+            <div class="col R-pause">
+                <input type="checkbox" checked>Pause v&iacute;deo while typing
+            </div>
+            <div class="col center">
+                <input class="btn btn-primary" type="submit" value="Save">
+                <input class="btn btn-primary disabled" type="submit" value="Finish">
+            </div>
+            <div class="col"></div>
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Help</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Keyboards shortcuts</h2>
+                    <table>
+                        <tr>
+                            <td>ctrl-space:</td>
+                            <td>play/pause v&iacute;deo while typing </td>
+                        </tr>
+                        <tr>
+                            <td>space:</td>
+                            <td>play/pause v&iacute;deo</td>
+                        </tr>
+                    </table>
+                    <h2>Icons</h2>
+                    <table>
+                        <tr>
+                            <td><img src="img/reject.svg" alt="Reject"></td>
+                            <td>Reject translation</td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/undo.svg" alt="undo"></td>
+                            <td>Undo translation</td>
+                        </tr>
+                        <tr>
+                            <td><img src="img/long-text.svg" alt="Long Text"></td>
+                            <td>Subtitle too long</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">Blue text</span></td>
+                            <td>Text revised by editor in supervisor mode</td>
+                        </tr>
+                        <tr>
+                            <td><span class="green">Green text</span></td>
+                            <td>Text revised</td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.dropdown-toggle').dropdown()
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+    {{!-- <div class="col-md-12">
+    <h2><div class="col-md-4">State: {{state}}</div></h2>
+    <h1><div class="col-md-6">{{originalLanguage}} --> {{outputLanguage}}</div></h1>
+    <h4><button class="col-md-2 return-to-crwdplat-action" type="button">Return to CrwdSrcPlt</button></h4>
+
+    </div> --}}
+{{!-- <div>       --}}
+    {{#if loaded}}
+    
+        
+        <div class="subtitles-box-collection-view col-sm R-subtitles" data-props-model="viewModel.getSubtitlesCollection" data-state="{{state}}" style="width:0px">
+            Subtitle Collection Box
+        </div>
+        <div class="video-temp-view col-sm R-video" data-props-model="viewModel.getVideoModel" data-state="{{state}}" data-wait-for-render="true">
+            Video Box
+        </div> 
+        
+    {{else}}
+    <div class="table-wrapper loading center">
+        </br>
+        <td class="loading">Loading subtitles</td>
+        </br>
+        <img src="img/three-dots.svg" width="40" alt="">
+
+    </div>
+            
+
+    {{/if}}
+    
+{{!-- </div> --}}

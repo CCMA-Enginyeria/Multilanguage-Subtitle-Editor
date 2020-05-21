@@ -1,0 +1,134 @@
+<div class="modal-dialog R-modal-title-description click-outside-action" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">EDIT TITLE AND SYNOPSIS</h5>
+            <button type="button" class="close close-action" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="modal-body">
+
+            {{!-- <div class="R-title">
+                <h2>Credits</h2>
+                <hr />
+                <div class="R-wrapper">
+                    <div class="T-title">Add credit box to retrieve the reviewer:
+                    <input type="checkbox" class="add-credits-action" {{#if creditsAdded}} checked {{/if}} alt="Add credits" title="Add credits"></input>
+
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class="R-title">
+                <h2>Title</h2>
+                <hr />
+                <div class="R-wrapper">
+                    <div class="R-left">
+                        <div class="T-font">Source:</div>
+                        <div class="T-title">{{originalTitle}}</div>
+                    </div>
+                    <div class=" R-right {{#if titleAccepted}}accepted{{/if}} {{#if titleOnCourse}}yellow{{/if}} {{#if titleConflict}}reject{{/if}}">
+                        <div class="F-wrapper">
+                            <div class="F-left">
+                                <div class="T-font">Translated:</div>
+                            </div>
+                            
+                            <div class="F-right">
+                                {{#if isReviewerActive}}
+                                    <a href="#" class="reject-title-action"><img src="img/reject.svg" alt="Mark conflict" title="Mark Conflict"></a>
+                                {{/if}}
+                                {{#if editedTitleUndo}}<a href="#" class="undo-title-action I-undo"><img src="img/undo.svg" alt="Undo" title="Undo All changes"></a>{{/if}}
+                                <input type="checkbox" class="accept-title-action" {{#if titleAccepted}}checked{{/if}}>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                    {{#if titleClicked}}
+                                    <input class="title-modified-action change-title-action {{#if isRTL}}right-rtl-title{{/if}}" type="text"
+                                        value="{{translatedTitle}}">
+                                    {{else}}
+                                    <div class="T-title
+                                        {{#if isRTL}}right-rtl-title{{/if}} 
+                                        {{#if titleReviewerEdited}}validated
+                                        {{else}}
+                                            {{#if titleConflict}}error
+                                            {{else}}
+                                                {{#if titleEdited}}
+                                                    corrected                                    
+                                                {{else}}
+                                                    automatic
+                                                {{/if}}
+                                            {{/if}}
+                                        {{/if}} translated change-title-action">{{translatedTitle}}</div>
+                                    {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="R-description">
+                <h2>Synopsis</h2>
+                <hr />
+                <div class="R-wrapper">
+                    <div class="R-left">
+                        <div class="T-font">Source: </div>
+                        <div class="T-description">{{originalSynopsis}}</div>
+                    </div>
+                    <div
+                        class="R-right {{#if synopsisAccepted}}accepted{{/if}} {{#if synopsisConflict}}reject{{/if}} {{#if synopsisOnCourse}}yellow{{/if}}">
+                        <div class="F-wrapper">
+                            <div class="F-left">
+                                <div class="T-font">Translated: </div>
+                            </div>
+                            <div class="F-right">
+                                {{!{{#unless synopsisConflict}}
+                                {{#if isReviewerActive}}
+                                <a href="#" class="reject-synopsis-action"><img src="img/reject.svg" alt="Mark conflict"
+                                        title="Mark Conflict"></a>
+                                {{/if}}
+                                {{!{{/unless}}
+                                {{#if editedSynopsisUndo}} <a href="#" class="undo-synopsis-action I-undo"><img
+                                        src="img/undo.svg" alt="Undo" title="Undo All changes"></a> {{/if}}
+                                {{#if isReviewerActive}}
+                                {{!{{#if synopsisConflict}}
+                                <input type="checkbox" class="accept-synopsis-action"
+                                    {{#if synopsisAccepted}}checked{{/if}}>
+                                {{!{{/if}}
+                                {{else}}
+                                <input type="checkbox" class="accept-synopsis-action"
+                                    {{#if synopsisAccepted}}checked{{/if}}>
+                                {{/if}}
+
+
+                            </div>
+                        </div>
+
+                        {{#if synopsisClicked}}
+                        <textarea class="synopsis-modified-action change-synopsis-action {{#if isRTL}}right-rtl-title{{/if}}">{{translatedSynopsis}}</textarea>
+                        {{else}}
+                        <div class="T-description
+                            {{#if isRTL}}right-rtl-title{{/if}} 
+                            {{#if synopsisReviewerEdited}}validated
+                            {{else}}
+                                {{#if synopsisConflict}}error
+                                {{else}}
+                                    {{#if synopsisEdited}}
+                                        corrected                                    
+                                    {{else}}
+                                        automatic
+                                    {{/if}}
+                                {{/if}}
+                        {{/if}} translated change-synopsis-action">{{translatedSynopsis}}</div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="close-action btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+</div>

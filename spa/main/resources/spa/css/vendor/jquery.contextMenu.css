@@ -1,0 +1,573 @@
+@charset "UTF-8";
+
+
+/*!
+ * jQuery contextMenu - Plugin for simple contextMenu handling
+ *
+ * Version: v2.3.1-dev
+ *
+ * Authors: Björn Brala (SWIS.nl), Rodney Rehm, Addy Osmani (patches for FF)
+ * Web: http://swisnl.github.io/jQuery-contextMenu/
+ *
+ * Copyright (c) 2011-2016 SWIS BV and contributors
+ *
+ * Licensed under
+ *   MIT License http://www.opensource.org/licenses/mit-license
+ *
+ * Date: 2016-10-25T19:12:34.206Z
+ */
+
+@-webkit-keyframes cm-spin {
+    0% {
+        -webkit-transform: translateY(-50%) rotate(0deg);
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-50%) rotate(359deg);
+        transform: translateY(-50%) rotate(359deg);
+    }
+}
+
+@-o-keyframes cm-spin {
+    0% {
+        -webkit-transform: translateY(-50%) rotate(0deg);
+        -o-transform: translateY(-50%) rotate(0deg);
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-50%) rotate(359deg);
+        -o-transform: translateY(-50%) rotate(359deg);
+        transform: translateY(-50%) rotate(359deg);
+    }
+}
+
+@keyframes cm-spin {
+    0% {
+        -webkit-transform: translateY(-50%) rotate(0deg);
+        -o-transform: translateY(-50%) rotate(0deg);
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-50%) rotate(359deg);
+        -o-transform: translateY(-50%) rotate(359deg);
+        transform: translateY(-50%) rotate(359deg);
+    }
+}
+
+@font-face {
+    font-family: "context-menu-icons";
+    font-style: normal;
+    font-weight: normal;
+
+    src: url("../../font/icomoon.eot?23gdc");
+    src: url("../../font/icomoon.eot?23gdc#iefix") format("embedded-opentype"), url("../../font/icomoon.woff2?23gdc") format("woff2"), url("../../font/icomoon.woff?23gdc") format("woff"), url("../../font/icomoon.ttf?23gdc") format("truetype");
+    /*src: url("../../font/vendor/context-menu-icons.eot?23gdc");
+  src: url("../../font/vendor/context-menu-icons.eot?23gdc#iefix") format("embedded-opentype"), url("../../font/vendor/context-menu-icons.woff2?23gdc") format("woff2"), url("../../font/vendor/context-menu-icons.woff?23gdc") format("woff"), url("../../font/vendor/context-menu-icons.ttf?23gdc") format("truetype");*/
+}
+
+
+
+/*Icones pròpies*/
+
+.context-menu-icon-carret:before {
+    content: "\e918";
+}
+
+.context-menu-icon-carret_fletxa:before {
+    content: "\e917";
+}
+
+.context-menu-icon-tancar:before {
+    content: "\e937"
+}
+
+.context-menu-icon-refrescar:before {
+    content: "\e900"
+}
+
+.context-menu-icon-favorits:before {
+    background-image: url(/img/icons/botons/favorits.svg);
+    background-repeat: no-repeat;
+    background-size: 14px;
+    content: " ";
+    width: 20px!important;
+    height: 15px;
+    background-position-x: 4px;
+    background-position-y: 2px;
+}
+.context-menu-icon-desmarcar:before {
+    background-image: url(/img/icons/botons/desmarcar_favorits.svg);
+    background-repeat: no-repeat;
+    background-size: 18px;
+    content: " ";
+    width: 20px!important;
+    height: 20px;
+    background-position-x: 4px;
+    background-position-y: 2px;
+}
+
+.context-menu-icon-mes:before {
+    content: "\e934"
+}
+
+.context-menu-icon-user:before {
+    content: "\e935"
+}
+
+.context-menu-icon-9:before {
+    content: "\e901"
+}
+
+.context-menu-icon-abancar_rapid_edreta:before {
+    content: "\e902"
+}
+
+.context-menu-icon-abancar_rapid_esquerra:before {
+    content: "\e903"
+}
+
+.context-menu-icon-altaveu:before {
+    content: "\e904"
+}
+
+.context-menu-icon-altaveu_playing:before {
+    content: "\e905"
+}
+
+.context-menu-icon-amunt:before {
+    content: "\e906"
+}
+
+.context-menu-icon-amunt_dos:before {
+    content: "\e907"
+}
+
+.context-menu-icon-amunt_gruixut:before {
+    content: "\e908"
+}
+
+.context-menu-icon-amunt_prim:before {
+    content: "\e909"
+}
+
+.context-menu-icon-anar_ultim_dreta:before {
+    content: "\e90a"
+}
+
+.context-menu-icon-anar_ultim_dreta_gran:before {
+    content: "\e90b"
+}
+
+.context-menu-icon-anar_ultim_esquerra:before {
+    content: "\e90c"
+}
+
+.context-menu-icon-anar_ultim_esquerra_gran:before {
+    content: "\e90d"
+}
+
+.context-menu-icon-avall_dos:before {
+    content: "\e90e"
+}
+
+.context-menu-icon-avall_gruixut:before {
+    content: "\e90f"
+}
+
+.context-menu-icon-avall_mitja:before {
+    content: "\e910"
+}
+
+.context-menu-icon-avall_prim:before {
+    content: "\e911"
+}
+
+.context-menu-icon-betacam:before {
+    content: "\e912"
+}
+
+.context-menu-icon-calendari:before {
+    content: "\e913"
+}
+
+.context-menu-icon-carpeta_oberta:before {
+    content: "\e914"
+}
+
+.context-menu-icon-carpeta_tancada:before {
+    content: "\e915"
+}
+
+.context-menu-icon-carppeta_oberta_fulla:before {
+    content: "\e916"
+}
+
+.context-menu-icon-carreto_fletxa:before {
+    content: "\e917"
+}
+
+.context-menu-icon-carro:before {
+    content: "\e918"
+}
+
+.context-menu-icon-CTL:before {
+    content: "\e919"
+}
+
+.context-menu-icon-CTL_RST:before {
+    content: "\e91a"
+}
+
+.context-menu-icon-desplegar:before {
+    content: "\e91b"
+}
+
+.context-menu-icon-disc:before {
+    content: "\e91c"
+}
+
+.context-menu-icon-dos_altaveus:before {
+    content: "\e91d"
+}
+
+.context-menu-icon-dreta_dos:before {
+    content: "\e91e"
+}
+
+.context-menu-icon-dreta_gruixut:before {
+    content: "\e91f"
+}
+
+.context-menu-icon-dreta_mitja:before {
+    content: "\e920"
+}
+
+.context-menu-icon-dreta_prim:before {
+    content: "\e921"
+}
+
+.context-menu-icon-esquerra_dos:before {
+    content: "\e922"
+}
+
+.context-menu-icon-esquerra_gruixut:before {
+    content: "\e923"
+}
+
+.context-menu-icon-esquerra_mitja:before {
+    content: "\e924"
+}
+
+.context-menu-icon-esquerra_prim:before {
+    content: "\e925"
+}
+
+.context-menu-icon-faders:before {
+    content: "\e926"
+}
+
+.context-menu-icon-fletxa_amunt:before {
+    content: "\e927"
+}
+
+.context-menu-icon-fletxa_avall:before {
+    content: "\e928"
+}
+
+.context-menu-icon-full_blanc:before {
+    content: "\e929"
+}
+
+.context-menu-icon-full_llista:before {
+    content: "\e92a"
+}
+
+.context-menu-icon-full_llista_creu:before {
+    content: "\e92b"
+}
+
+.context-menu-icon-full_llista_fletxa:before {
+    content: "\e92c"
+}
+
+.context-menu-icon-play:before {
+    content: "\e92d"
+}
+
+.context-menu-icon-popup:before {
+    content: "\e92e"
+}
+
+.context-menu-icon-prismatics:before {
+    content: "\e92f"
+}
+
+.context-menu-icon-saltar_seguent_dreta_petit:before {
+    content: "\e930"
+}
+
+.context-menu-icon-saltar_seguent_esquerre_petit:before {
+    content: "\e931"
+}
+
+.context-menu-icon-TC:before {
+    content: "\e932"
+}
+
+.context-menu-icon-xinxeta:before {
+    content: "\e933"
+}
+
+.context-menu-icon-xinxeta_punxada:before {
+    content: "\e936"
+}
+
+
+
+
+
+
+/*End icones pròpies */
+
+
+/* icones originals borrar per posar a producció 
+.context-menu-icon-add:before {
+  content: "\EA01";
+}
+
+.context-menu-icon-copy:before {
+  content: "\EA02";
+}
+
+.context-menu-icon-cut:before {
+  content: "\EA03";
+}
+
+.context-menu-icon-delete:before {
+  content: "\EA04";
+}
+
+.context-menu-icon-edit:before {
+  content: "\EA05";
+}
+
+.context-menu-icon-loading:before {
+  content: "\EA06";
+}
+
+.context-menu-icon-paste:before {
+  content: "\EA07";
+}
+
+.context-menu-icon-quit:before {
+  content: "\EA08";
+}
+*/
+
+.context-menu-icon::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 2em;
+    font-family: "context-menu-icons";
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    color: #000;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.context-menu-icon.context-menu-hover:before {
+    color: #fff;
+}
+
+.context-menu-icon.context-menu-disabled::before {
+    color: #bbb;
+}
+
+.context-menu-icon.context-menu-icon-loading:before {
+    -webkit-animation: cm-spin 2s infinite;
+    -o-animation: cm-spin 2s infinite;
+    animation: cm-spin 2s infinite;
+}
+
+.context-menu-icon.context-menu-icon--fa {
+    display: list-item;
+    font-family: inherit;
+}
+
+.context-menu-icon.context-menu-icon--fa::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 2em;
+    font-family: FontAwesome;
+    font-size: 1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    color: #2980b9;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-hover:before {
+    color: #fff;
+}
+
+.context-menu-icon.context-menu-icon--fa.context-menu-disabled::before {
+    color: #bbb;
+}
+
+.context-menu-list {
+    position: absolute;
+    display: inline-block;
+    min-width: 13em;
+    max-width: 26em;
+    padding: .25em 0;
+    margin: .3em;
+    font-family: inherit;
+    font-size: inherit;
+    list-style-type: none;
+    background: #fff;
+    border: 1px solid #bebebe;
+    border-radius: .2em;
+
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+
+.context-menu-item {
+    position: relative;
+    padding: .2em 2em;
+    color: #2f2f2f;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #fff;
+}
+
+.context-menu-separator {
+    padding: 0;
+    margin: .35em 0;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.context-menu-item>label>input,
+.context-menu-item>label>textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.context-menu-item.context-menu-hover {
+    color: #fff;
+    cursor: pointer;
+    background-color: #2980b9;
+}
+
+.context-menu-item.context-menu-disabled {
+    color: #bbb;
+    cursor: default;
+    background-color: #fff;
+}
+
+.context-menu-input.context-menu-hover {
+    cursor: default;
+}
+
+.context-menu-submenu:after {
+    position: absolute;
+    top: 50%;
+    right: .5em;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    content: ''; //border-color: transparent transparent transparent #2f2f2f;
+    border-color: rgba(0, 0, 0, .15);
+    border-style: solid;
+    border-width: .25em 0 .25em .25em;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+
+/**
+ * Inputs
+ */
+
+.context-menu-item.context-menu-input {
+    padding: .3em .6em;
+}
+
+
+
+/* vertically align inside labels */
+
+.context-menu-input>label>* {
+    vertical-align: top;
+}
+
+
+
+/* position checkboxes and radios as icons */
+
+.context-menu-input>label>input[type="checkbox"],
+.context-menu-input>label>input[type="radio"] {
+    position: relative;
+    top: .12em;
+    margin-right: .4em;
+}
+
+.context-menu-input>label {
+    margin: 0;
+}
+
+.context-menu-input>label,
+.context-menu-input>label>input[type="text"],
+.context-menu-input>label>textarea,
+.context-menu-input>label>select {
+    display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.context-menu-input>label>textarea {
+    height: 7em;
+}
+
+.context-menu-item>.context-menu-list {
+    top: .3em;
+    /* re-positioned by js */
+    right: -.3em;
+    display: none;
+}
+
+.context-menu-item.context-menu-visible>.context-menu-list {
+    display: block;
+}
+
+.context-menu-accesskey {
+    text-decoration: underline;
+}
