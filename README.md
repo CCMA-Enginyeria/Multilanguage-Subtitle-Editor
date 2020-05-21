@@ -6,7 +6,7 @@ This Subtitles Editor Tool is an application made for helping with the revision 
 
 The tool let users to see all the subtitles with its translation and edit or translate them. This, is synced to the player. The interface is the following:
 
-![enter image description here](https://github.com/CCMA-Enginyeria/Multilanguage-Subtitle-Editor/blob/master/snapshots/interface.PNG?raw=true)
+![enter image description here](https://github.com/CCMA-Enginyeria/Multilanguage-Subtitle-Editor/blob/master/snapshots/interface.png?raw=true)
 
 So,  the application receives as input to XML files containing the original subtitles and a translated version, and the link of the corresponding video.
 
