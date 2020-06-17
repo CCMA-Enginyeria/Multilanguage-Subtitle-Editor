@@ -46,7 +46,8 @@ So, the player consists of two layers. One with the video itself rendered with t
 
 
 ## Author
-© Corporació Catalana de Mitjans Audiovisuals, SA
+© Corporació Catalana de Mitjans Audiovisuals, SA.
+
 contact: Enginyeria-Recerca@ccma.cat
 
 ## ⚠️  Licence
