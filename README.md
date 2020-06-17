@@ -44,6 +44,11 @@ So, to save it to our servers we just make a request with a JSON that contains t
 **Player:** To render the subtitles on the video we are using the EbuTTD format and our own Subtitle Plugin use in the whole Corporació Catalana de Mitjans Audiovisuals.
 So, the player consists of two layers. One with the video itself rendered with the VideoJS plugin, and the other with the Subtitles Plugin where the subtitles are rendered.
 
+
+## Author
+© Corporació Catalana de Mitjans Audiovisuals, SA
+contact: Enginyeria-Recerca@ccma.cat
+
 ## ⚠️  Licence
 The code in this project is licensed under [Creative Commons 2.0](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 
